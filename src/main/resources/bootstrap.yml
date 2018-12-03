@@ -1,15 +1,15 @@
+logging:
+  file: /var/log/cloud/${spring.application.name}/${spring.application.name}.log
+  path: /var/log/cloud/${spring.application.name}/
 server:
   port: 8080
 spring:
   application:
     name: admin
-  devtools:
-    restart:
-      log-condition-evaluation-delta: true
-      enabled: true
   cloud:
     config:
       discovery:
+        enabled: true
         service-id: configserver
 eureka:
   instance:
@@ -19,16 +19,11 @@ eureka:
       defaultZone: http://192.168.0.106:10699/eureka/
 management:
   endpoints:
-    jmx:
-      exposure:
-        include: '*'
     web:
       exposure:
         include: '*'
-      cors:
-        allowed-headers: '*'
-        allowed-methods: '*'
-        allowed-origins: '*'
   endpoint:
     health:
       show-details: always
+    restart:
+      enabled: true
